@@ -55,10 +55,10 @@ const Home: React.FC = () => {
 
   return (
     <Container maxWidth="lg">
-      <Typography variant="h4" align="center" style={{ marginTop: '50px' }}>
+      {/* <Typography variant="h4" align="center" style={{ marginTop: '50px' }}>
         E/G Articles
-      </Typography>
-      <Grid container spacing={5} style={{ margin: '20px' }}>
+      </Typography> */}
+      <Grid container spacing={4} style={{ margin: '20px' }}>
         {articles.map((article) => (
           <Grid border={0.5} item xs={10}  sm={10} key={article.id}>
             <CardContent>
