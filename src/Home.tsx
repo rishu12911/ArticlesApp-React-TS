@@ -25,7 +25,7 @@ const Home: React.FC = () => {
         setArticles(response.data);
         setLoading(false);
       } catch (error: any) {
-        if (error.response && error.response.status === 500 && retryCount < 10) {
+        if (error.response && error.response.status === 500 && error.response.status === 404 && retryCount < 10) {
           setRetryCount(retryCount + 1);
           setLoading(true);
           return;
