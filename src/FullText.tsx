@@ -24,7 +24,7 @@ const FullText: React.FC = () => {
         const response = await axios.get(`https://ps-dev-1-partnergateway.patientsky.dev/assignment/articles/${id}`);
         setArticle(response.data);
         setLoading(false);
-      } catch (error: any) { // Explicitly type error as any
+      } catch (error: any) { 
         if (error.response && error.response.status === 500 && retryCount < 10) {
           setRetryCount(retryCount + 1);
           setLoading(true);
