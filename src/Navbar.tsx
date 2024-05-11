@@ -12,13 +12,13 @@ const Navbar: React.FC = () => {
           <img src={reactLogo} alt="Logo" />
         </Link>
         
-        <span className="navbar-center">E/G Article</span>
+        <span className="navbar-center">E/G Articles</span>
         
         {location.pathname !== '/' && (
-          <Link to="/" className="back-button">
-            Go Back
-          </Link>
-        )}
+          <Link to="/" className="back-button">Go Back</Link>
+          
+          )}
+        
       </div>
     </nav>
   );

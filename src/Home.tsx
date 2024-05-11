@@ -60,7 +60,7 @@ const Home: React.FC = () => {
       </Typography> */}
       <Grid container spacing={4} style={{ margin: '20px' }}>
         {articles.map((article) => (
-          <Grid border={0.5} item xs={10}  sm={10} key={article.id}>
+          <Grid  borderBottom={1} item xs={10}  sm={10} key={article.id}>
             <CardContent>
               <Typography sx={{ fontSize: 28 }} color="text.secondary" gutterBottom>
                 {article.title}
