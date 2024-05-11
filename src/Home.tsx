@@ -44,10 +44,14 @@ const Home: React.FC = () => {
   </Typography></div>;
   }
 
-  if (error) {
+  if (error ) {
     return (
       <div>
-        Error: {error}
+        <Typography variant="h2" align="center" style={{ marginTop: '50px' }}>
+      Error: {error} </Typography>
+      <Typography variant="h4" align="center" style={{ marginTop: '50px' }}> Please Refresh </Typography>
+       
+    
         
       </div>
     );

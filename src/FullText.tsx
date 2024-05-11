@@ -25,7 +25,7 @@ const FullText: React.FC = () => {
         setArticle(response.data);
         setLoading(false);
       } catch (error: any) { 
-        if (error.response && error.response.status === 500 && retryCount < 2) {
+        if (error.response && error.response.status === 500 && retryCount <2) {
           setRetryCount(retryCount + 1);
           setLoading(true);
           return;
@@ -39,13 +39,19 @@ const FullText: React.FC = () => {
   }, [id, retryCount]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div> <Typography variant="h5" align="center" style={{ marginTop: '50px' }}>
+    Loading...
+  </Typography></div>;
   }
 
   if (error) {
     return (
-      <div>
-        Error: {error}
+      <div><Typography variant="h2" align="center" style={{ marginTop: '50px' }}>
+      Error: {error} </Typography>
+      <Typography variant="h5" align="center" style={{ marginTop: '50px' }}> Please Refresh </Typography>
+       
+    
+        
         
       </div>
     );
