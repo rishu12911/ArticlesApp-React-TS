@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import axios from 'axios'; // Import AxiosError
+import axios from 'axios'; 
 
 interface Article {
   id: string;
