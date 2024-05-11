@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import Card from '@mui/material/Card';
 
 interface Article {
   id: string;
@@ -58,30 +59,32 @@ const Home: React.FC = () => {
   }
 
   return (
-    <Container maxWidth="lg">
-      {/* <Typography variant="h4" align="center" style={{ marginTop: '50px' }}>
-        E/G Articles
-      </Typography> */}
-      <Grid container spacing={4} style={{ margin: '20px' }}>
-        {articles.map((article) => (
-          <Grid  borderBottom={1} item xs={10}  sm={10} key={article.id}>
-            <CardContent>
-              <Typography sx={{ fontSize: 28 }} color="text.secondary" gutterBottom>
-                {article.title}
-              </Typography>
-              <Typography variant="body2">{article.summary}</Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="medium" component={Link} to={`/article/${article.id}`}>
-                Read More
-              </Button>
-            </CardActions>
-          </Grid>
-        ))}
-        
-
+  <Container maxWidth="lg">
+  {/* <Typography variant="h4" align="center" style={{ marginTop: '50px' }}>
+    E/G Articles
+  </Typography> */}
+  <Grid container spacing={4} style={{ margin: '20px' }}>
+    {articles.map((article) => (
+      <Grid item xs={10} sm={12} key={article.id} style={{ marginBottom: '10px' }}>
+        <Card style={{ marginBottom: '10px', backgroundColor: '#EBEBEBAA', color: '#fff' }}>
+          <CardContent>
+            <Typography sx={{ fontSize: 28 }} color="text.secondary" gutterBottom>
+              {article.title}
+            </Typography>
+            <Typography  color="text.secondary" variant="body2">{article.summary}</Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="medium"  component={Link} to={`/article/${article.id}`} style={{ color: 'light-blue' }}>
+              Read More
+            </Button>
+          </CardActions>
+        </Card>
       </Grid>
-    </Container>
+    ))}
+  </Grid>
+</Container>
+
+
   );
 };
 
