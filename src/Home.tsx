@@ -49,7 +49,7 @@ const Home: React.FC = () => {
       <div>
         <Typography variant="h2" align="center" style={{ marginTop: '50px' }}>
       Error: {error} </Typography>
-      <Typography variant="h4" align="center" style={{ marginTop: '50px' }}> Please Refresh </Typography>
+      <Typography variant="h4" align="center" style={{ marginTop: '50px' }}> Please Go Back </Typography>
        
     
         

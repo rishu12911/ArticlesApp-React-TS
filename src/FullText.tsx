@@ -48,7 +48,7 @@ const FullText: React.FC = () => {
     return (
       <div><Typography variant="h2" align="center" style={{ marginTop: '50px' }}>
       Error: {error} </Typography>
-      <Typography variant="h5" align="center" style={{ marginTop: '50px' }}> Please Refresh </Typography>
+      <Typography variant="h5" align="center" style={{ marginTop: '50px' }}> Please Go Back </Typography>
        
     
         
