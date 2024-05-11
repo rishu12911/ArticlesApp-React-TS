@@ -25,7 +25,7 @@ const FullText: React.FC = () => {
         setArticle(response.data);
         setLoading(false);
       } catch (error: any) { 
-        if (error.response && error.response.status === 500 && retryCount < 10) {
+        if (error.response && error.response.status === 500 && retryCount < 2) {
           setRetryCount(retryCount + 1);
           setLoading(true);
           return;
