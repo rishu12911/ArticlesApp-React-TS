@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TS Article App
+For this project, the approach was to create a React application with a simple frontend interface for displaying a list of articles fetched from a server. The main focus was on implementing error handling for data fetching, providing a smooth user experience, and ensuring robustness in the face of potential network issues.
 
-Currently, two official plugins are available:
+Technologies Used:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React + TS : Used for building the frontend user interface components.
+axios: Utilized for making HTTP requests to fetch data from the server.
+Material-UI: Employed for styling and UI components to enhance the visual presentation of the application.
+Challenges Faced:
 
-## Expanding the ESLint configuration
+Error Handling During Data Fetching:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+One of the primary challenges was implementing robust error handling for data fetching. This involved handling various types of errors, including network issues, server errors, and unexpected data structures.
+Dealing with transient network issues and ensuring that the application gracefully recovers from them without disrupting the user experience was a key challenge.
+Retrying Failed Requests:
 
-- Configure the top-level `parserOptions` property like this:
+Implementing a retry mechanism for failed HTTP requests while avoiding infinite retry loops or excessive server load posed a challenge.
+Balancing the number of retry attempts and the frequency of retries to optimize for successful data fetching without overloading the server or causing delays for the user was crucial.
+Approach to Challenges:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Error Handling Strategy:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Developed a comprehensive error handling strategy that categorizes errors based on their nature and provides appropriate feedback to the user.
+Leveraged React's state management to efficiently manage loading, error, and retry states within the components.
+Retry Mechanism Implementation:
+
+Implemented a retry mechanism with a finite number of retry attempts to mitigate transient network issues and recover from server errors.
+Throttled retry attempts to prevent overwhelming the server with excessive requests and to ensure a smooth user experience.
+Conclusion:
+
+Overall, by adopting a systematic approach to error handling, implementing a retry mechanism, and leveraging appropriate technologies, the project successfully addressed the challenges associated with data fetching and provided a robust frontend interface for displaying articles. Continuous testing and refinement were key to ensuring the reliability and performance of the application.
