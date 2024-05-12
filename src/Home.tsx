@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { Grid, CardContent, Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
-import axios from 'axios';
 import Card from '@mui/material/Card';
 
 interface Article {
   id: string;
   title: string;
   summary: string;
+  fullText?: string; 
 }
 
 const Home: React.FC = () => {
@@ -18,6 +18,7 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState<number>(0);
+  const maxRetries = 3;
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -26,7 +27,7 @@ const Home: React.FC = () => {
         setArticles(response.data);
         setLoading(false);
       } catch (error: any) {
-        if (error.response && error.response.status === 500 && retryCount < 2) {
+        if (error.response && error.response.status === 500 && retryCount < maxRetries) {
           setRetryCount(retryCount + 1);
           setLoading(true);
           return;
@@ -39,53 +40,71 @@ const Home: React.FC = () => {
     fetchArticles();
   }, [retryCount]);
 
+  const fetchFullTextWithRetry = async (id: string) => {
+    const article = articles.find(article => article.id === id);
+    if (!article || article.fullText) return; // Exit if article not found or fullText already exists
+
+    let retries = 0;
+    while (retries < maxRetries) {
+      try {
+        const response = await axios.get(`https://ps-dev-1-partnergateway.patientsky.dev/assignment/articles/${id}`);
+        const updatedArticles = articles.map(article => {
+          if (article.id === id) {
+            return { ...article, fullText: response.data.fullText };
+          }
+          return article;
+        });
+        setArticles(updatedArticles);
+        break; 
+      } catch (error) {
+        console.error('Error fetching full text:', error);
+        retries++;
+      }
+    }
+  };
+
   if (loading) {
-    return <div><Typography variant="h5" align="center" style={{ marginTop: '50px' }}>
-    Loading...
-  </Typography></div>;
+    return <div><Typography variant="h5" align="center" style={{ marginTop: '50px' }}>Loading...</Typography></div>;
   }
 
-  if (error ) {
+  if (error) {
     return (
       <div>
-        <Typography variant="h2" align="center" style={{ marginTop: '50px' }}>
-      Error: {error} </Typography>
-      <Typography variant="h4" align="center" style={{ marginTop: '50px' }}> Please Go Back </Typography>
-       
-    
-        
+        <Typography variant="h2" align="center" style={{ marginTop: '50px' }}>Oops! Something Went Wrong...</Typography>
+        <Typography variant="h4" align="center" style={{ marginTop: '50px' }}>Error: {error}</Typography>
       </div>
     );
   }
 
   return (
     <Container maxWidth="lg" style={{ display: 'flex', justifyContent: 'center' }}>
-    {/* <Typography variant="h4" align="center" style={{ marginTop: '50px' }}>
-      E/G Articles
-    </Typography> */}
-    <Grid container spacing={4} style={{ margin: '20px' }}>
-      {articles.map((article) => (
-        <Grid item xs={10} sm={12} key={article.id} style={{ marginBottom: '10px' }}>
-          <Card style={{ marginBottom: '10px', backgroundColor: '#EBEBEBAA', color: '#fff' }}>
-            <CardContent>
-              <Typography sx={{ fontSize: 28 }} style={{ color: 'black' }}  gutterBottom>
-                {article.title}
-              </Typography>
-              <Typography color="text.secondary" variant="body2">{article.summary}</Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="medium" component={Link} to={`/article/${article.id}`} style={{ color: 'light-blue' }}>
-                Read More
-              </Button>
-            </CardActions>
-          </Card>
-        </Grid>
-      ))}
-    </Grid>
-  </Container>
-  
-
-
+      <Grid container spacing={4} style={{ margin: '20px' }}>
+        {articles.map((article) => (
+          <Grid item xs={10} sm={10} key={article.id} style={{ marginBottom: '10px' }}>
+            <Card style={{ marginBottom: '10px', backgroundColor: '#EBEBEBAA', color: '#fff' }}>
+              <CardContent>
+                <Typography sx={{ fontSize: 28 }} style={{ color: 'black' }} gutterBottom>
+                  {article.title}
+                </Typography>
+                <Typography color="text.secondary" variant="body2" style={{ marginBottom: '10px' }}>{article.summary}</Typography>
+                {article.fullText && (
+                  <Typography color="text.secondary" variant="body2">{article.fullText}</Typography>
+                )}
+              </CardContent>
+              <CardActions>
+                <Button
+                  size="medium"
+                  onClick={() => fetchFullTextWithRetry(article.id)}
+                  style={{ color: 'light-blue' }}
+                >
+                  Read More
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

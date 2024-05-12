@@ -1,24 +1,19 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import reactLogo from './assets/react.svg';
+import reactLogo from './assets/react.svg'
+
 
 const Navbar: React.FC = () => {
-  const location = useLocation();
-
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="logo">
-          <img src={reactLogo} alt="Logo" />
-        </Link>
-        
-        <span className="navbar-center">E/G Articles</span>
-        
-        {location.pathname !== '/' && (
-          <Link to="/" className="back-button">Go Back</Link>
+        <div className="navbar-left">
+          <img src={reactLogo} alt="Logo" className="logo" />
+          <span className="navbar-brand">E/G Articles</span>
+        </div>
+        <div className="navbar-right">
+          <button className="nav-button">Find Your Path</button>
           
-          )}
-        
+        </div>
       </div>
     </nav>
   );
