@@ -113,3 +113,7 @@
 .nav-button:hover {
   background-color: #777;
 }
+
+.article-card:hover {
+  transform: scale(1.05);
+}

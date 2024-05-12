@@ -81,7 +81,7 @@ const Home: React.FC = () => {
       <Grid container spacing={4} style={{ margin: '20px' }}>
         {articles.map((article) => (
           <Grid item xs={10} sm={10} key={article.id} style={{ marginBottom: '10px' }}>
-            <Card style={{ marginBottom: '10px', backgroundColor: '#EBEBEBAA', color: '#fff' }}>
+            <Card style={{ marginBottom: '10px', backgroundColor: '#EBEBEBAA', color: '#fff', boxShadow: '10px 10px 5px #aaaaaa' }}>
               <CardContent>
                 <Typography sx={{ fontSize: 28 }} style={{ color: 'black' }} gutterBottom>
                   {article.title}
