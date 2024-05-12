@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [retryCount, setRetryCount] = useState<number>(0);
-  const maxRetries = 3;
+  const maxRetries = 4;
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -82,15 +82,15 @@ const Home: React.FC = () => {
         {articles.map((article) => (
           <Grid item xs={10} sm={10} key={article.id} style={{ marginBottom: '10px' }}>
             <Card style={{ marginBottom: '10px', backgroundColor: '#EBEBEBAA', color: '#fff', boxShadow: '10px 10px 5px #aaaaaa' }}>
-              <CardContent>
-                <Typography sx={{ fontSize: 28 }} style={{ color: 'black' }} gutterBottom>
-                  {article.title}
-                </Typography>
-                <Typography color="text.secondary" variant="body2" style={{ marginBottom: '10px' }}>{article.summary}</Typography>
-                {article.fullText && (
-                  <Typography color="text.secondary" variant="body2">{article.fullText}</Typography>
-                )}
-              </CardContent>
+            <CardContent>
+  <Typography sx={{ fontSize: 28 }} style={{ color: 'black' }} gutterBottom>
+    {article.title}
+  </Typography>
+  <Typography color="text.secondary" variant="body2" style={{ marginBottom: '10px' }}>{article.summary}</Typography>
+  <Typography id="article-fullText" className={article.fullText ? 'expand active' : 'expand'}>
+    {article.fullText}
+  </Typography>
+</CardContent>
               <CardActions>
                 <Button
                   size="medium"

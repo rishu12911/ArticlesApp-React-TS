@@ -117,3 +117,16 @@
 .article-card:hover {
   transform: scale(1.05);
 }
+
+.expand {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 3s ease; 
+  color: black; 
+  
+}
+
+.expand.active {
+  max-height: 1000px; /* Adjust the maximum height according to your content */
+}
+
