@@ -42,7 +42,7 @@ const Home: React.FC = () => {
 
   const fetchFullTextWithRetry = async (id: string) => {
     const article = articles.find(article => article.id === id);
-    if (!article || article.fullText) return; // Exit if article not found or fullText already exists
+    if (!article || article.fullText) return; 
 
     let retries = 0;
     while (retries < maxRetries) {
