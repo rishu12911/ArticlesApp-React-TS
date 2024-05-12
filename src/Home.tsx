@@ -41,6 +41,7 @@ const Home: React.FC = () => {
   }, [retryCount]);
 
   const fetchFullTextWithRetry = async (id: string) => {
+    
     const article = articles.find(article => article.id === id);
     if (!article || article.fullText) return; 
 
@@ -59,6 +60,7 @@ const Home: React.FC = () => {
       } catch (error) {
         console.error('Error fetching full text:', error);
         retries++;
+        
       }
     }
   };
@@ -80,7 +82,7 @@ const Home: React.FC = () => {
     <Container maxWidth="lg" style={{ display: 'flex', justifyContent: 'center' }}>
       <Grid container spacing={4} style={{ margin: '20px' }}>
         {articles.map((article) => (
-          <Grid item xs={10} sm={10} key={article.id} style={{ marginBottom: '10px' }}>
+          <Grid item xs={20} sm={10} key={article.id} >
             <Card style={{ marginBottom: '10px', backgroundColor: '#EBEBEBAA', color: '#fff', boxShadow: '10px 10px 5px #aaaaaa' }}>
             <CardContent>
   <Typography sx={{ fontSize: 28 }} style={{ color: 'black' }} gutterBottom>
